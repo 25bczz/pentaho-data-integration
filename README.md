@@ -9,3 +9,7 @@
 1.  Go to sendEmail
 1.  Put your info
 1.  Run the project
+
+# Repository:
+
+https://github.com/25bczz/pentaho-data-integration

@@ -395,7 +395,7 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>1296</xloc>
+      <xloc>1408</xloc>
       <yloc>160</yloc>
       <attributes_kjc/>
     </entry>
@@ -465,7 +465,7 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>1040</xloc>
+      <xloc>1152</xloc>
       <yloc>160</yloc>
       <attributes_kjc/>
     </entry>
@@ -478,7 +478,7 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>912</xloc>
+      <xloc>1024</xloc>
       <yloc>160</yloc>
       <attributes_kjc/>
     </entry>
@@ -501,50 +501,73 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>768</xloc>
+      <xloc>880</xloc>
       <yloc>160</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
-      <name>sendEmail</name>
+      <name>sendEmailFromDB</name>
       <description/>
-      <type>MAIL</type>
+      <type>TRANS</type>
       <attributes/>
-      <server>smtp.office365.com</server>
-      <port>587</port>
-      <destination>diorafsilgon2@gmail.com</destination>
-      <destinationCc/>
-      <destinationBCc/>
-      <replyto>a26006@alunos.ipca.pt</replyto>
-      <replytoname>Diogo Gonçalves</replytoname>
-      <subject>Novos descontos!</subject>
-      <include_date>Y</include_date>
-      <contact_person/>
-      <contact_phone/>
-      <comment>${html_body}</comment>
-      <include_files>N</include_files>
-      <zip_files>N</zip_files>
-      <zip_name/>
-      <use_auth>Y</use_auth>
-      <use_secure_auth>Y</use_secure_auth>
-      <auth_user>a26006@alunos.ipca.pt</auth_user>
-      <auth_password>Encrypted </auth_password>
-      <only_comment>Y</only_comment>
-      <use_HTML>Y</use_HTML>
-      <use_Priority>N</use_Priority>
-      <encoding>UTF-8</encoding>
-      <priority>normal</priority>
-      <importance>normal</importance>
-      <sensitivity>normal</sensitivity>
-      <secureconnectiontype>TLS</secureconnectiontype>
-      <replyToAddresses/>
-      <filetypes>      </filetypes>
-      <embeddedimages>
-      </embeddedimages>
+      <specification_method>filename</specification_method>
+      <trans_object_id/>
+      <filename>${Internal.Entry.Current.Directory}/sendEmailFromDB.ktr</filename>
+      <transname/>
+      <arg_from_previous>N</arg_from_previous>
+      <params_from_previous>N</params_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <clear_rows>N</clear_rows>
+      <clear_files>N</clear_files>
+      <set_logfile>N</set_logfile>
+      <logfile/>
+      <logext/>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <loglevel>Basic</loglevel>
+      <cluster>N</cluster>
+      <slave_server_name/>
+      <set_append_logfile>N</set_append_logfile>
+      <wait_until_finished>Y</wait_until_finished>
+      <follow_abort_remote>N</follow_abort_remote>
+      <create_parent_folder>N</create_parent_folder>
+      <logging_remote_work>N</logging_remote_work>
+      <run_configuration>Pentaho local</run_configuration>
+      <suppress_result_data>N</suppress_result_data>
+      <parameters>
+        <pass_all_parameters>Y</pass_all_parameters>
+      </parameters>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>1168</xloc>
+      <xloc>1296</xloc>
+      <yloc>160</yloc>
+      <attributes_kjc/>
+    </entry>
+    <entry>
+      <name>htmlPreviousDelete</name>
+      <description/>
+      <type>DELETE_FILE</type>
+      <attributes/>
+      <filename>${Internal.Entry.Current.Directory}/../data/output/finalData.html</filename>
+      <fail_if_file_not_exists>N</fail_if_file_not_exists>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>752</xloc>
+      <yloc>336</yloc>
+      <attributes_kjc/>
+    </entry>
+    <entry>
+      <name>htmlPreviousCheck</name>
+      <description/>
+      <type>FILE_EXISTS</type>
+      <attributes/>
+      <filename>${Internal.Entry.Current.Directory}/../data/output/finalData.html</filename>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>752</xloc>
       <yloc>160</yloc>
       <attributes_kjc/>
     </entry>
@@ -587,24 +610,6 @@
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>finalDataCheck</from>
-      <to>htmlBuild</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>sendEmail</from>
-      <to>Success</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
       <from>htmlBuild</from>
       <to>htmlCheck</to>
       <from_nr>0</from_nr>
@@ -624,7 +629,52 @@
     </hop>
     <hop>
       <from>htmlSetAsAmbient</from>
-      <to>sendEmail</to>
+      <to>sendEmailFromDB</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>sendEmailFromDB</from>
+      <to>Success</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>finalDataCheck</from>
+      <to>htmlPreviousCheck</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>htmlPreviousCheck</from>
+      <to>htmlBuild</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>N</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>htmlPreviousCheck</from>
+      <to>htmlPreviousDelete</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>htmlPreviousDelete</from>
+      <to>htmlBuild</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
